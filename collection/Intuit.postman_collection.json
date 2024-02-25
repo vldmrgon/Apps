@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "1f5ba147-4f16-4a3b-8270-55a226fc4fe8",
+		"name": "Intuit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllPlayers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/v1/players",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"players"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPlayerById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/v1/players/obandsh01",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"players",
+						"obandsh01"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPlayersWithPagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/players/paged?page=1&size=10\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"players",
+						"paged"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10\n"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
