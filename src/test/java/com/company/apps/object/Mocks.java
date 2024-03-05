@@ -47,6 +47,10 @@ public class Mocks {
     public Pageable pageable;
 
     static {
+
+        // FIXME: Attention! If there is an error here, please, check all mutable object imports,
+        //  before making major changes (cursor on the object Shift+Alt+7)
+
         birthInfo = new BirthInfo(
                 BIRTH_DATE.getYear(),
                 BIRTH_DATE.getMonthValue(),

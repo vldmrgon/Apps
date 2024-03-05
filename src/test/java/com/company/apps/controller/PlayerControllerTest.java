@@ -47,7 +47,9 @@ class PlayerControllerTest {
         mockMvc
                 .perform(MockMvcRequestBuilders.get(BASE_URL))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(mockPlayerList)));
+                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(mockPlayerList)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].playerID").value(Mocks.PLAYER_ID));
+
     }
 
     @Test
@@ -61,8 +63,8 @@ class PlayerControllerTest {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get(PAGED_URL)
-                .param("page", String.valueOf(page))
-                .param("size", String.valueOf(size)))
+                        .param("page", String.valueOf(page))
+                        .param("size", String.valueOf(size)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(mockPlayerDTO)));
     }

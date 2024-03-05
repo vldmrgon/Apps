@@ -1,11 +1,13 @@
 package com.company.apps.service;
 
 import com.company.apps.exception.PlayerBusinessException;
+import com.company.apps.repository.MyRepo;
 import com.company.apps.utils.convertor.PlayerConvertor;
 import com.company.apps.repository.PlayerRepository;
 import com.company.apps.model.dto.PlayerDTO;
 import com.company.apps.model.entity.Player;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
