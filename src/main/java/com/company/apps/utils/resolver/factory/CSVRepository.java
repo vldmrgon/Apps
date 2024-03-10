@@ -1,4 +1,4 @@
-package com.company.apps.repository;
+package com.company.apps.utils.resolver.factory;
 
 import java.util.Optional;
 import java.util.List;

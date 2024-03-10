@@ -1,7 +1,6 @@
 package com.company.apps.utils.resolver.factory;
 
 import com.company.apps.utils.resolver.annotation.IdEntity;
-import com.company.apps.repository.CSVRepository;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;

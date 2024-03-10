@@ -1,10 +1,8 @@
 package com.company.apps;
 
 import com.company.apps.model.entity.Player;
-import com.company.apps.repository.CSVRepository;
 import com.company.apps.repository.MyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
@@ -30,8 +28,7 @@ public class StartApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         myRepo.save(Player.builder().playerID("123").nameFirst("Vlad").nameLast("Gon").build());
-        List<Player> all = myRepo.findAll();
-
-
+        // FIXME: 3/10/24 findAll() - return null error
+//        List<Player> all = myRepo.findAll();
     }
 }

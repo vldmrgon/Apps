@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ResolvableType;
 import org.springframework.util.StringUtils;
 
-import com.company.apps.repository.CSVRepository;
-
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.Reflections;
@@ -76,7 +74,6 @@ public class DynamicCSVRepositoryFactory implements BeanDefinitionRegistryPostPr
     }
 
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws
-            BeansException {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
     }
 }

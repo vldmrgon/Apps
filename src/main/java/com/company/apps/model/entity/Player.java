@@ -1,39 +1,42 @@
 package com.company.apps.model.entity;
 
+import com.company.apps.utils.resolver.annotation.CsvNestedEntity;
+import com.company.apps.utils.resolver.annotation.CsvColumn;
+import com.company.apps.utils.resolver.annotation.CsvEntity;
 import com.company.apps.utils.resolver.annotation.IdEntity;
 import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@CsvEntity
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-//@CsvEntity(repositoryClass = PlayerRepository.class)
 public class Player {
 
-    //    @CsvColumn(nameForParsing = "playerID")
     @IdEntity
+    @CsvColumn(nameForParsing = "playerID")
     private String playerID;
 
-    //    @CsvNestedEntity
+    @CsvNestedEntity
     private BirthInfo birthInfo;
 
-    //    @CsvNestedEntity
+    @CsvNestedEntity
     private DeathInfo deathInfo;
 
-    //    @CsvColumn(nameForParsing = "nameFirst", defaultValue = "unknown")
+    @CsvColumn(nameForParsing = "nameFirst", defaultValue = "unknown")
     private String nameFirst;
 
-    //    @CsvColumn(nameForParsing = "nameLast", defaultValue = "unknown")
+    @CsvColumn(nameForParsing = "nameLast", defaultValue = "unknown")
     private String nameLast;
 
-    //    @CsvColumn(nameForParsing = "nameLast", defaultValue = "unknown")
+    @CsvColumn(nameForParsing = "nameLast", defaultValue = "unknown")
     private String nameGiven;
 
-    //    @CsvNestedEntity
+    @CsvNestedEntity
     private PhysicalInfo physicalInfo;
 
-    //    @CsvNestedEntity
+    @CsvNestedEntity
     private CareerInfo careerInfo;
 }
