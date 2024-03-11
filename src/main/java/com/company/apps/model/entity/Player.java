@@ -1,9 +1,6 @@
 package com.company.apps.model.entity;
 
-import com.company.apps.utils.resolver.annotation.CsvNestedEntity;
-import com.company.apps.utils.resolver.annotation.CsvColumn;
-import com.company.apps.utils.resolver.annotation.CsvEntity;
-import com.company.apps.utils.resolver.annotation.IdEntity;
+import com.company.apps.utils.resolver.annotation.*;
 import lombok.*;
 
 @Getter

@@ -35,6 +35,7 @@ public class DynamicCSVRepositoryFactory implements BeanDefinitionRegistryPostPr
 
         var subTypes = reflections.getSubTypesOf(CSVRepository.class);
         subTypes.remove(DynamicCSVRepositoryInvocationHandler.class);
+
         if (subTypes.isEmpty()) return;
 
         for (var subType : subTypes) {

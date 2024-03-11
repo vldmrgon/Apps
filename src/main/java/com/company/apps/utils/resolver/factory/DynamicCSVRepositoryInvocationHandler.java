@@ -43,7 +43,7 @@ public class DynamicCSVRepositoryInvocationHandler<T, ID> implements CSVReposito
                 yield null;
             }
 
-            default -> throw new IllegalStateException("Unexpected value: " + method.getName());
+            default -> throw new IllegalStateException("Unexpected method or method values: " + method.getName());
         };
     }
 
@@ -93,6 +93,7 @@ public class DynamicCSVRepositoryInvocationHandler<T, ID> implements CSVReposito
     private ID getIdEntity(T entity) {
         ID key = null;
         Field[] declaredFields = entity.getClass().getDeclaredFields();
+
         for (Field declaredField : declaredFields) {
             if (declaredField.isAnnotationPresent(IdEntity.class)) {
                 declaredField.setAccessible(true);
@@ -104,9 +105,11 @@ public class DynamicCSVRepositoryInvocationHandler<T, ID> implements CSVReposito
                 }
             }
         }
+
         if (key == null) {
             throw new IllegalStateException("Entity doesn't have a field marked with @IdEntity");
         }
+
         return key;
     }
 }
