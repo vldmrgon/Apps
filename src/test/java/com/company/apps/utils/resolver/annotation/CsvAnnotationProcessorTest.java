@@ -136,10 +136,10 @@ class CsvAnnotationProcessorTest {
                 .hadErrorContaining(CsvAnnotationProcessor.ERROR_IDENTITY_FIELD);
     }
 
-    private Compilation getCompilation(JavaFileObject validSource) {
+    private Compilation getCompilation(JavaFileObject source) {
         return Compiler
                 .javac()
                 .withProcessors(new CsvAnnotationProcessor())
-                .compile(validSource);
+                .compile(source);
     }
 }

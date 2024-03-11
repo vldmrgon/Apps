@@ -1,6 +1,9 @@
 package com.company.apps.utils.resolver.factory;
 
-import com.company.apps.utils.resolver.annotation.IdEntity;
+
+import com.company.apps.utils.resolver.extractor.CsvEntityMetadataExtractor;
+import com.company.apps.utils.resolver.extractor.EntityMetadataExtractor;
+import com.company.apps.utils.resolver.cache.CsvCache;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
@@ -9,18 +12,19 @@ import java.util.List;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Field;
 
 public class DynamicCSVRepositoryInvocationHandler<T, ID> implements CSVRepository<T, ID>, InvocationHandler {
 
+    private final EntityMetadataExtractor<T, ID> extractor;
+    private final ConcurrentHashMap<ID, T> cache;
     private final Class<T> entityClass;
     private final Class<ID> idClass;
-    ConcurrentHashMap cache;
 
     public DynamicCSVRepositoryInvocationHandler(Class<T> entityClass, Class<ID> idClass) {
         this.entityClass = entityClass;
         this.idClass = idClass;
-        cache = new ConcurrentHashMap<ID, T>();
+        this.cache = new CsvCache<ID, T>().getCache();
+        this.extractor = new CsvEntityMetadataExtractor<>();
     }
 
     @Override
@@ -29,7 +33,14 @@ public class DynamicCSVRepositoryInvocationHandler<T, ID> implements CSVReposito
 
             case "save" -> save((T) args[0]);
 
-            case "findAll" -> args.length == 0 ? findAll() : findAll((int) args[0], (int) args[1]);
+            case "findAll" -> {
+
+                if (args == null || args.length == 0) {
+                    yield findAll();
+                } else {
+                    yield findAll((int) args[0], (int) args[1]);
+                }
+            }
 
             case "findById" -> findById((ID) args[0]);
 
@@ -49,7 +60,7 @@ public class DynamicCSVRepositoryInvocationHandler<T, ID> implements CSVReposito
 
     @Override
     public T save(T entity) {
-        ID key = getIdEntity(entity);
+        ID key = extractor.extractId(entity);
         return (T) cache.put(key, entity);
     }
 
@@ -88,28 +99,5 @@ public class DynamicCSVRepositoryInvocationHandler<T, ID> implements CSVReposito
     @Override
     public void deleteAll() {
         cache.clear();
-    }
-
-    private ID getIdEntity(T entity) {
-        ID key = null;
-        Field[] declaredFields = entity.getClass().getDeclaredFields();
-
-        for (Field declaredField : declaredFields) {
-            if (declaredField.isAnnotationPresent(IdEntity.class)) {
-                declaredField.setAccessible(true);
-                try {
-                    key = (ID) declaredField.get(entity);
-                    break;
-                } catch (Exception e) {
-                    throw new RuntimeException("Failed to access @IdEntity field", e);
-                }
-            }
-        }
-
-        if (key == null) {
-            throw new IllegalStateException("Entity doesn't have a field marked with @IdEntity");
-        }
-
-        return key;
     }
 }
